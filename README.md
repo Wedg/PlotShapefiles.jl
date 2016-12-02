@@ -3,8 +3,10 @@ PlotShapefiles.jl
 
 A package to plot shapefiles with Julia.
 
+The package started by copying the method shared by Keno Fischer [here](http://nbviewer.jupyter.org/github/JuliaX/iap2014/blob/master/GeoData.ipynb) and then extended to catering for each of the different types of shapefile (polygons, polylines, points, multipoints and their variants but does not currently support the Multipatch type) as well as overlaying the image onto a Google map.
+
 There are three main functions - with methods described in the demo:
-- plotshape() - for plotting all types of shapefiles (e.g. polygons, polylines, points, etc. but does not currenlty support the Multipatch type)
+- plotshape() - for basic plotting of each type of shapefiles as well as layering different shapefile plots
 - choropleth() - for plotting a choropleth with polygon shapefiles
 - google_overlay() - for overlaying the shape plot onto a Google map image fetched from their static map API
 
