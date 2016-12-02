@@ -11,7 +11,7 @@ There are three main functions - with methods described in the demo:
 ## Demo / Documentation
 
 A detailed demo describing the functionality and creating the example images below is available:  
-1. [here as an html](demo/PlotShapefiles_Demo1.html) file, or  
+1. [here as an html](http://htmlpreview.github.com/?https://github.com/Wedg/PlotShapefiles.jl/blob/master/demo/PlotShapefiles_Demo1.html) file, or  
 2. [here as an ipynb file](demo/PlotShapefiles_Demo1.ipynb).
 
 ## Examples of outputs.
