@@ -10,6 +10,11 @@ There are three main functions - with methods described in the demo:
 - choropleth() - for plotting a choropleth with polygon shapefiles
 - google_overlay() - for overlaying the shape plot onto a Google map image fetched from their static map API
 
+The package is not yet registered so to use, run the command:
+```
+Pkg.clone("https://github.com/Wedg/PlotShapefiles.jl.git")
+```
+
 ## Demo / Documentation
 
 A detailed demo describing the functionality and creating the example images below is available:  
