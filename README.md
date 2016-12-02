@@ -11,7 +11,7 @@ There are three main functions - with methods described in the demo:
 - google_overlay() - for overlaying the shape plot onto a Google map image fetched from their static map API
 
 The package is not yet registered so to use, run the command:
-```
+```jlcon
 Pkg.clone("https://github.com/Wedg/PlotShapefiles.jl.git")
 ```
 
