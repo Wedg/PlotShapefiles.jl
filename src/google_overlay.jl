@@ -109,16 +109,16 @@ The transparency in the color used in the shape plot is used.
 function overlay(shape_plot, google_img)
 
     # Image dimensions
-    width, height = size(google_img)
+    height, width = size(google_img)
 
     # Create Cairo surface, draw polygon to surface, reinterpret as an array of RGB fixed point numbers
-    surface = Cairo.CairoARGBSurface(zeros(UInt32, height, width))
+    surface = CairoARGBSurface(zeros(UInt32, height, width))
     draw(PNG(surface), shape_plot)
-    overlay = reinterpret(BGRA{FixedPointNumbers.UFixed{UInt8, 8}}, surface.data)
+    overlay = reinterpret(BGRA{Normed{UInt8, 8}}, surface.data')
 
     # Create combined image
     outimg = similar(google_img)
-    for i=1:width, j=1:height
+    for i=1:height, j=1:width
 
         # Transparency value at pixel i,j
         α = overlay[i,j].alpha

@@ -12,8 +12,8 @@ using Reexport
 @reexport using Compose
 @reexport using Images
 @reexport using Colors
-import Cairo
-import FixedPointNumbers
+using Cairo: CairoARGBSurface
+using FixedPointNumbers: Normed
 
 import Base.identity
 

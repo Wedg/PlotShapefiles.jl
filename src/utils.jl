@@ -42,7 +42,7 @@ end
 
 # Calculate a minimum bounding rectangle from a selection of shapes
 # Useful for drawing a subset of shapes and not using the "global" MBR
-function minBR(shapes::AbstractArray{Shapefile.ESRIShape, 1})
+function minBR{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1})
     box = shapes[1].MBR
     for i = 2:length(shapes)
         (shapes[i].MBR.top < box.top) && (box.top = shapes[i].MBR.top)
@@ -54,7 +54,12 @@ function minBR(shapes::AbstractArray{Shapefile.ESRIShape, 1})
 end
 
 # Convert shapes from Abstract Type Array{ESRIShape, 1} to concrete type
-concrete(shapes::AbstractArray{Shapefile.ESRIShape, 1}) = convert(Array{typeof(shapes[1]), 1}, shapes)
+# No longer needed after changes to Shapefile.jl package
+#=
+function concrete{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1})
+    convert(Array{typeof(shapes[1]), 1}, shapes)
+end
+=#
 
 # Root and dataset paths
 rootpath = dirname(@__FILE__)[1:end-4]

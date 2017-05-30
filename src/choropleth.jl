@@ -5,10 +5,11 @@
 ####################
 
 # Plot choropleth  - given array of shapes and a canvas
-function choropleth(shapes::AbstractArray{Shapefile.ESRIShape, 1}, canvas::Compose.Context,
-                    fill_data, fill_color_map;
-                    convertcoords=lonlat_to_webmercator, img_width=12cm,
-                    line_width=0.05mm, line_color="black", transform=identity)
+function choropleth{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1},
+                   canvas::Compose.Context,
+                   fill_data, fill_color_map;
+                   convertcoords=lonlat_to_webmercator, img_width=12cm,
+                   line_width=0.05mm, line_color="black", transform=identity)
 
     # This method is only for polygons
     @assert typeof(shapes[1]) <: ShpPolygon
@@ -38,7 +39,8 @@ function choropleth(shapes::AbstractArray{Shapefile.ESRIShape, 1}, canvas::Compo
 end
 
 # Plot choropleth - given array of shapes and an MBR
-function choropleth(shapes::AbstractArray{Shapefile.ESRIShape, 1}, MBR::Shapefile.Rect{Float64},
+function choropleth{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1},
+                    MBR::Shapefile.Rect{Float64},
                     fill_data, fill_color_map;
                     convertcoords=lonlat_to_webmercator, img_width=12cm, options...)
 
@@ -51,7 +53,7 @@ function choropleth(shapes::AbstractArray{Shapefile.ESRIShape, 1}, MBR::Shapefil
 end
 
 # Plot choropleth - given an array of shapes
-function choropleth(shapes::AbstractArray{Shapefile.ESRIShape, 1},
+function choropleth{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1},
                     fill_data, fill_color_map;
                     options...)
 

@@ -20,7 +20,8 @@ Units in Compose can be either:
 If you just provide numbers e.g. if x_pts below was an array of Float64
 the units would default to context units.
 =#
-function ESRItoComposeCircle(points::Vector{Shapefile.Point{Float64}}, convertcoords, radius)
+function ESRItoComposeCircle{T<:ShpPoint}(points::AbstractArray{T, 1}, convertcoords,
+                             radius)
     x_pts = Array(Measures.Length{:cx, Float64}, 0)
     y_pts = Array(Measures.Length{:cy, Float64}, 0)
     for pt in points
@@ -32,7 +33,8 @@ function ESRItoComposeCircle(points::Vector{Shapefile.Point{Float64}}, convertco
 end
 
 # Plot an array of points
-function draw_shp{T<:ShpPoint}(shapes::AbstractArray{T, 1}, canvas, convertcoords, line_width, line_color, fill_color, radius)
+function draw_shp{T<:ShpPoint}(shapes::AbstractArray{T, 1}, canvas, convertcoords,
+                  line_width, line_color, fill_color, radius)
     compose(canvas, (context(), ESRItoComposeCircle(shapes, convertcoords, radius),
                      linewidth(line_width), stroke(line_color), fill(fill_color)))
 end
