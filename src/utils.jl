@@ -37,12 +37,12 @@ function create_canvas(MBR::Shapefile.Rect{Float64}, convertcoords, img_width)
     dims = UnitBox(left, bottom, width, -height)
 
     # Return blank canvas
-    canvas = context(units=dims)
+    return context(units=dims)
 end
 
 # Calculate a minimum bounding rectangle from a selection of shapes
 # Useful for drawing a subset of shapes and not using the "global" MBR
-function minBR{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray{T, 1})
+function minBR(shapes::AbstractArray{T, 1}) where {T<:Shapefile.GeoInterface.AbstractGeometry}
     box = shapes[1].MBR
     for i = 2:length(shapes)
         (shapes[i].MBR.top < box.top) && (box.top = shapes[i].MBR.top)
@@ -50,7 +50,19 @@ function minBR{T<:Shapefile.GeoInterface.AbstractGeometry}(shapes::AbstractArray
         (shapes[i].MBR.bottom > box.bottom) && (box.bottom = shapes[i].MBR.bottom)
         (shapes[i].MBR.right > box.right) && (box.right = shapes[i].MBR.right)
     end
-    box
+    return box
+end
+
+# Point types don't have field MBR so need it's own method
+function minBR(shapes::AbstractArray{T, 1}) where {T<:ShpPoint}
+    box = Shapefile.Rect(shapes[1].y, shapes[1].x, shapes[1].y, shapes[1].x)
+    for i = 2:length(shapes)
+        (shapes[i].y < box.top) && (box.top = shapes[i].y)
+        (shapes[i].x < box.left) && (box.left = shapes[i].x)
+        (shapes[i].y > box.bottom) && (box.bottom = shapes[i].y)
+        (shapes[i].x > box.right) && (box.right = shapes[i].x)
+    end
+    return box
 end
 
 # Convert shapes from Abstract Type Array{ESRIShape, 1} to concrete type

@@ -20,8 +20,9 @@ Units in Compose can be either:
 If you just provide numbers e.g. if pts below was an array of tuples of Float64
 the units would default to context units.
 =#
-function ESRItoComposePolygon{T<:ShpPoint}(points::AbstractArray{T, 1}, convertcoords)
-    pts = Array(Tuple{Measures.Length{:cx, Float64}, Measures.Length{:cy, Float64}}, 0)
+function ESRItoComposePolygon(points::AbstractArray{T, 1},
+                              convertcoords) where {T<:ShpPoint}
+    pts = Array{Tuple{Measures.Length{:cx, Float64}, Measures.Length{:cy, Float64}}}(undef, 0)
     for pt in points
         x, y = convertcoords(pt.x, pt.y)
         push!(pts, (x*cx, y*cy))
@@ -30,15 +31,15 @@ function ESRItoComposePolygon{T<:ShpPoint}(points::AbstractArray{T, 1}, convertc
 end
 
 # Plot a single part polygon
-function compose_single{T<:ShpPolygon}(polygon::T, canvas, convertcoords, line_width,
-                        line_color, fill_color)
+function compose_single(polygon::T, canvas, convertcoords, line_width,
+                        line_color, fill_color) where {T<:ShpPolygon}
     compose(canvas, (context(), ESRItoComposePolygon(polygon.points, convertcoords),
                      linewidth(line_width), stroke(line_color), fill(fill_color)))
 end
 
 # Plot a multi part polygon
-function compose_multi{T<:ShpPolygon}(polygon::T, canvas, convertcoords,
-                       line_width, line_color, fill_color)
+function compose_multi(polygon::T, canvas, convertcoords, line_width,
+                       line_color, fill_color) where {T<:ShpPolygon}
     start = 1
     finish = length(polygon.points)
     for idx in polygon.parts[2:end]
@@ -53,8 +54,8 @@ function compose_multi{T<:ShpPolygon}(polygon::T, canvas, convertcoords,
 end
 
 # Plot an array of polygons
-function draw_shp{T<:ShpPolygon}(shapes::AbstractArray{T, 1}, canvas,
-                  convertcoords, line_width, line_color, fill_color, radius)
+function draw_shp(shapes::AbstractArray{T, 1}, canvas, convertcoords,
+                  line_width, line_color, fill_color, radius) where {T<:ShpPolygon}
     for polygon in shapes
         if length(polygon.parts) == 1
             canvas = compose_single(polygon, canvas, convertcoords, line_width, line_color,

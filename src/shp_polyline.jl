@@ -20,8 +20,9 @@ Units in Compose can be either:
 If you just provide numbers e.g. if pts below was an array of tuples of Float64
 the units would default to context units.
 =#
-function ESRItoComposeLine{T<:ShpPoint}(points::AbstractArray{T, 1}, convertcoords)
-    pts = Array(Tuple{Measures.Length{:cx, Float64}, Measures.Length{:cy, Float64}}, 0)
+function ESRItoComposeLine(points::AbstractArray{T, 1},
+                           convertcoords) where {T<:ShpPoint}
+    pts = Array{Tuple{Measures.Length{:cx, Float64}, Measures.Length{:cy, Float64}}}(undef, 0)
     for pt in points
         x, y = convertcoords(pt.x, pt.y)
         push!(pts, (x*cx, y*cy))
@@ -30,15 +31,15 @@ function ESRItoComposeLine{T<:ShpPoint}(points::AbstractArray{T, 1}, convertcoor
 end
 
 # Plot a single part polyline
-function compose_single{T<:ShpPolyline}(polyline::T, canvas, convertcoords, line_width,
-                        line_color)
+function compose_single(polyline::T, canvas, convertcoords, line_width,
+                        line_color) where {T<:ShpPolyline}
     compose(canvas, (context(), ESRItoComposeLine(polyline.points, convertcoords),
                      linewidth(line_width), stroke(line_color)))
 end
 
 # Plot a multi part polyline
-function compose_multi{T<:ShpPolyline}(polyline::T, canvas, convertcoords, line_width,
-                       line_color)
+function compose_multi(polyline::T, canvas, convertcoords, line_width,
+                       line_color) where {T<:ShpPolyline}
     start = 1
     finish = length(polyline.points)
     for idx in polyline.parts[2:end]
@@ -53,8 +54,9 @@ function compose_multi{T<:ShpPolyline}(polyline::T, canvas, convertcoords, line_
 end
 
 # Plot an array of polylines
-function draw_shp{T<:ShpPolyline}(shapes::AbstractArray{T, 1}, canvas, convertcoords,
-                  line_width, line_color, fill_color, radius)
+function draw_shp(shapes::AbstractArray{T, 1}, canvas, convertcoords,
+                  line_width, line_color, fill_color,
+                  radius) where {T<:ShpPolyline}
     for polyline in shapes
         if length(polyline.parts) == 1
             canvas = compose_single(polyline, canvas, convertcoords, line_width, line_color)

@@ -36,12 +36,12 @@ export open_shapefile,
 ##
 ##############################################################################
 
-include("utils.jl")
 include("coordinate_conversions.jl")
 include("shp_point.jl")
 include("shp_multipoint.jl")
 include("shp_polygon.jl")
 include("shp_polyline.jl")
+include("utils.jl")
 include("plotshape.jl")
 include("choropleth.jl")
 include("google_overlay.jl")

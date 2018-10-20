@@ -22,12 +22,12 @@ function google_overlay(canvas::Compose.Context, key::String, zoom::Int;
 
     # Build a dictionary of the google options for the API call
     options = Dict(
-    :center => "$(mid_Lat),$(mid_Lon)",
-    :zoom => "$zoom",
-    :size => "$(p_width)x$(p_height)",
-    :scale => "$scale",
-    :maptype => maptype,
-    :key => key)
+        :center => "$(mid_Lat),$(mid_Lon)",
+        :zoom => "$zoom",
+        :size => "$(p_width)x$(p_height)",
+        :scale => "$scale",
+        :maptype => maptype,
+        :key => key)
 
     # Fetch the Google map image
     google_img = load_google_image(options)
@@ -43,10 +43,10 @@ longitude and lattitude to use in fetching the right image from Google.
 function canvas_to_MBR(canvas::Compose.Context)
 
     # From UnitBox
-    left = canvas.units.value.x0
-    bottom = canvas.units.value.y0
-    width = canvas.units.value.width
-    height = canvas.units.value.height
+    left = canvas.units.x0
+    bottom = canvas.units.y0
+    width = canvas.units.width
+    height = canvas.units.height
     right = left + width
     top = bottom + height
 

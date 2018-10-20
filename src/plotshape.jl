@@ -8,11 +8,11 @@
 AbstractGeom = Shapefile.GeoInterface.AbstractGeometry
 
 # Plot Shapefile - given array of shapes and a canvas
-function plotshape{T<:AbstractGeom}(shparray::AbstractArray{T, 1},
+function plotshape(shparray::AbstractArray{T, 1},
                    canvas::Compose.Context;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    line_width=0.05mm, line_color="black", fill_color=nothing,
-                   radius=[0.5cm])
+                   radius=[0.5cm]) where {T<:AbstractGeom}
 
     # Plot and return canvas
     draw_shp(shparray, canvas, convertcoords, line_width, line_color, fill_color, radius)
@@ -20,9 +20,10 @@ function plotshape{T<:AbstractGeom}(shparray::AbstractArray{T, 1},
 end
 
 # Plot Shapefile - given array of shapes and an MBR
-function plotshape{T<:AbstractGeom}(shparray::AbstractArray{T, 1},
+function plotshape(shparray::AbstractArray{T, 1},
                    MBR::Shapefile.Rect{Float64};
-                   convertcoords=lonlat_to_webmercator, img_width=12cm, options...)
+                   convertcoords=lonlat_to_webmercator, img_width=12cm,
+                   options...) where {T<:AbstractGeom}
 
     # Create canvas
     canvas = create_canvas(MBR, convertcoords, img_width)
@@ -34,8 +35,8 @@ function plotshape{T<:AbstractGeom}(shparray::AbstractArray{T, 1},
 end
 
 # Plot Shapefile - given an array of shapes
-function plotshape{T<:AbstractGeom}(shparray::AbstractArray{T, 1};
-                   options...)
+function plotshape(shparray::AbstractArray{T, 1};
+                   options...) where {T<:AbstractGeom}
 
     # Create MBR
     MBR = minBR(shparray)
