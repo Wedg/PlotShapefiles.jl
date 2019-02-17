@@ -8,10 +8,10 @@ module PlotShapefiles
 
 using Reexport
 @reexport using Shapefile
-@reexport using Measures
 @reexport using Compose
-@reexport using Images
+@reexport using Measures
 @reexport using Colors
+@reexport using Images
 using Cairo: CairoARGBSurface
 using FixedPointNumbers: Normed
 

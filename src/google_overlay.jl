@@ -15,7 +15,7 @@ function google_overlay(canvas::Compose.Context, key::String, zoom::Int;
     MBR = canvas_to_MBR(canvas::Compose.Context)
 
     # Coordinates from the MBR
-    cxEast, cyNorth, cxWest, cySouth = MBR.right, MBR.bottom, MBR.left, MBR.top
+    cxEast, cyNorth, cxWest, cySouth = MBR.right, MBR.top, MBR.left, MBR.bottom
 
     # Use coordinates to get Google API parameters
     mid_Lon, mid_Lat, p_width, p_height = bbox_coords_and_zoom_to_center_and_size(cxEast, cyNorth, cxWest, cySouth, zoom)
@@ -44,18 +44,18 @@ function canvas_to_MBR(canvas::Compose.Context)
 
     # From UnitBox
     left = canvas.units.x0
-    bottom = canvas.units.y0
+    top = canvas.units.y0
     width = canvas.units.width
     height = canvas.units.height
     right = left + width
-    top = bottom + height
+    bottom = top + height
 
     # Convert back to longitude and lattitude
     left, top = webmercator_to_lonlat(left, top)
     right, bottom = webmercator_to_lonlat(right, bottom)
 
     # Create an MBR
-    Shapefile.Rect(top, left, bottom, right)
+    Shapefile.Rect(left, bottom, right, top)
 end
 
 function bbox_coords_and_zoom_to_center_and_size(cxEast, cyNorth, cxWest, cySouth, zoom)

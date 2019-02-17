@@ -26,8 +26,8 @@ function ESRItoComposeCircle(points::AbstractArray{T, 1}, convertcoords,
     y_pts = Array{Measures.Length{:cy, Float64}}(undef, 0)
     for pt in points
         x, y = convertcoords(pt.x, pt.y)
-        push!(x_pts, x*cx)
-        push!(y_pts, y*cy)
+        push!(x_pts, x * cx)
+        push!(y_pts, y * cy)
     end
     Compose.circle(x_pts, y_pts, radius)
 end

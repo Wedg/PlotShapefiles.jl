@@ -25,7 +25,7 @@ function ESRItoComposeLine(points::AbstractArray{T, 1},
     pts = Array{Tuple{Measures.Length{:cx, Float64}, Measures.Length{:cy, Float64}}}(undef, 0)
     for pt in points
         x, y = convertcoords(pt.x, pt.y)
-        push!(pts, (x*cx, y*cy))
+        push!(pts, (x * cx, y * cy))
     end
     Compose.line(pts)
 end
