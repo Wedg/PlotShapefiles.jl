@@ -12,9 +12,9 @@ There are three main functions - with methods described in the demo:
 - choropleth() - for plotting a choropleth with polygon shapefiles
 - google_overlay() - for overlaying the shape plot onto a Google map image fetched from their static map API
 
-The package is not yet registered so to download, run the command:
+The package is not yet registered so to download, run the following command in the Pkg REPL mode (accessed by entering `]` from the main REPL):
 ```jlcon
-Pkg.clone("https://github.com/Wedg/PlotShapefiles.jl.git")
+(v1.1) pkg> add https://github.com/Wedg/PlotShapefiles.jl
 ```
 
 ## Demo / Documentation
