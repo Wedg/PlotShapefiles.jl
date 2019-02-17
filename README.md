@@ -20,7 +20,7 @@ Pkg.clone("https://github.com/Wedg/PlotShapefiles.jl.git")
 ## Demo / Documentation
 
 A detailed demo describing the functionality and creating the example images below is available:  
-1. [here as an html file](demo/PlotShapefiles_Demo_1.html) file, or  
+1. [here as an html file](http://htmlpreview.github.com/?https://github.com/Wedg/PlotShapefiles.jl/blob/master/demo/PlotShapefiles_Demo_1.html) , or  
 2. [here as an ipynb file](demo/PlotShapefiles_Demo_1.ipynb) that you can run in Jupyter (all the files needed are contained in the repository)
 
 ## Examples of outputs.
