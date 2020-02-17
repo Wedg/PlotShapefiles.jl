@@ -19,7 +19,7 @@ x0 := left, y0 := top, width := right-left, height := -(top-bottom)
 The UnitBox typically has origin at top left and moves down and right (an image convention).
 To change to the convention of having the origin at the bottom left we use a negative height.
 =#
-function create_canvas(MBR::Shapefile.Rect{Float64}, convertcoords, img_width)
+function create_canvas(MBR::Shapefile.Rect, convertcoords, img_width)
 
     # Coordinate conversion
     left, top = convertcoords(MBR.left, MBR.top)

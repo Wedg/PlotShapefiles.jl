@@ -21,7 +21,7 @@ end
 
 # Plot Shapefile - given array of shapes and an MBR
 function plotshape(shparray::AbstractArray{T, 1},
-                   MBR::Shapefile.Rect{Float64};
+                   MBR::Shapefile.Rect;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    options...) where {T<:AbstractGeom}
 
@@ -51,7 +51,7 @@ function plotshape(shp::Shapefile.Handle; options...)
 end
 
 # Plot Shapefile - given the Shapefile Handle and an MBR
-function plotshape(shp::Shapefile.Handle, MBR::Shapefile.Rect{Float64}; options...)
+function plotshape(shp::Shapefile.Handle, MBR::Shapefile.Rect; options...)
     plotshape(shp.shapes, MBR; options...)
 end
 

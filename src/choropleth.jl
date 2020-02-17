@@ -39,7 +39,7 @@ function choropleth(shapes::AbstractArray{T, 1}, canvas::Compose.Context,
 end
 
 # Plot choropleth - given array of shapes and an MBR
-function choropleth(shapes::AbstractArray{T, 1}, MBR::Shapefile.Rect{Float64},
+function choropleth(shapes::AbstractArray{T, 1}, MBR::Shapefile.Rect,
                     fill_data, fill_color_map;
                     convertcoords=lonlat_to_webmercator, img_width=12cm,
                     options...) where {T<:Shapefile.GeoInterface.AbstractGeometry}
