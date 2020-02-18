@@ -46,26 +46,28 @@ end
 # Useful for drawing a subset of shapes and not using the "global" MBR
 function minBR(shapes::AbstractArray{T, 1}) where {T<:Shapefile.GeoInterface.AbstractGeometry}
     box = shapes[1].MBR
+    left, bottom, right, top = box.left, box.bottom, box.right, box.top
     for i = 2:length(shapes)
-        (shapes[i].MBR.top > box.top) && (box.top = shapes[i].MBR.top)
-        (shapes[i].MBR.left < box.left) && (box.left = shapes[i].MBR.left)
-        (shapes[i].MBR.bottom < box.bottom) && (box.bottom = shapes[i].MBR.bottom)
-        (shapes[i].MBR.right > box.right) && (box.right = shapes[i].MBR.right)
+        (shapes[i].MBR.left < left) && (left = shapes[i].MBR.left)
+        (shapes[i].MBR.bottom < bottom) && (bottom = shapes[i].MBR.bottom)
+        (shapes[i].MBR.right > right) && (right = shapes[i].MBR.right)
+        (shapes[i].MBR.top > top) && (top = shapes[i].MBR.top)
     end
-    return box
+    return Shapefile.Rect(left, bottom, right, top)
 end
 
 # Calculate a minimum bounding rectangle from a selection of points
 # Point types don't have field MBR so need it's own method
 function minBR(shapes::AbstractArray{T, 1}) where {T<:ShpPoint}
-    box = Shapefile.Rect(shapes[1].y, shapes[1].x, shapes[1].y, shapes[1].x)
+    #box = Shapefile.Rect(shapes[1].y, shapes[1].x, shapes[1].y, shapes[1].x)
+    left, bottom, right, top = shapes[1].x, shapes[1].y, shapes[1].x, shapes[1].y
     for i = 2:length(shapes)
-        (shapes[i].y > box.top) && (box.top = shapes[i].y)
-        (shapes[i].x < box.left) && (box.left = shapes[i].x)
-        (shapes[i].y < box.bottom) && (box.bottom = shapes[i].y)
-        (shapes[i].x > box.right) && (box.right = shapes[i].x)
+        (shapes[i].x < left) && (left = shapes[i].x)
+        (shapes[i].y < bottom) && (bottom = shapes[i].y)
+        (shapes[i].x > right) && (right = shapes[i].x)
+        (shapes[i].y > top) && (top = shapes[i].y)
     end
-    return box
+    return Shapefile.Rect(left, bottom, right, top)
 end
 
 # Convert shapes from Abstract Type Array{ESRIShape, 1} to concrete type
