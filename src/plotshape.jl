@@ -20,10 +20,17 @@ function plotshape(shparray::AbstractArray{T, 1},
 end
 
 # Plot Shapefile - given array of shapes and an MBR
-function plotshape(shparray::AbstractArray{T, 1},
+function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
                    MBR::Shapefile.Rect;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    options...) where {T<:AbstractGeom}
+
+    # Check for missings
+    try
+        shparray = disallowmissing(shparray)
+    catch
+        error("Error: Shape array contains missing values")
+    end
 
     # Create canvas
     canvas = create_canvas(MBR, convertcoords, img_width)
@@ -35,8 +42,15 @@ function plotshape(shparray::AbstractArray{T, 1},
 end
 
 # Plot Shapefile - given an array of shapes
-function plotshape(shparray::AbstractArray{T, 1};
+function plotshape(shparray::AbstractArray{Union{Missing, T}, 1};
                    options...) where {T<:AbstractGeom}
+
+    # Check for missings
+    try
+        shparray = disallowmissing(shparray)
+    catch
+        error("Error: Shape array contains missing values")
+    end
 
     # Create MBR
     MBR = minBR(shparray)
