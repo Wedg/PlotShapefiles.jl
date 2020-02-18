@@ -8,7 +8,7 @@
 AbstractGeom = Shapefile.GeoInterface.AbstractGeometry
 
 # Plot Shapefile - given array of shapes and a canvas
-function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
+function plotshape(shparray::Union{AbstractArray{T, 1}, AbstractArray{Union{Missing, T},1}},
                    canvas::Compose.Context;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    line_width=0.05mm, line_color="black", fill_color=nothing,
@@ -27,7 +27,7 @@ function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
 end
 
 # Plot Shapefile - given array of shapes and an MBR
-function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
+function plotshape(shparray::Union{AbstractArray{T, 1}, AbstractArray{Union{Missing, T},1}},
                    MBR::Shapefile.Rect;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    options...) where {T<:AbstractGeom}
@@ -49,7 +49,7 @@ function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
 end
 
 # Plot Shapefile - given an array of shapes
-function plotshape(shparray::AbstractArray{Union{Missing, T}, 1};
+function plotshape(shparray::Union{AbstractArray{T, 1}, AbstractArray{Union{Missing, T},1}};
                    options...) where {T<:AbstractGeom}
 
     # Check for missings
