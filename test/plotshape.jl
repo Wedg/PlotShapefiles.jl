@@ -8,7 +8,7 @@ rivers = open_shapefile(joinpath(mexicopath, "rivers.shp"))
 
 # Test polygon
 canvas1 = plotshape(states)
-test1 = (typeof(canvas) == Compose.Context)
+test1 = (typeof(canvas1) == Compose.Context)
 
 # Test point
 canvas2 = plotshape(cities, canvas1, line_width=0.25mm, line_color="red", fill_color=RGB(1,1,0), radius=[0.05cm])

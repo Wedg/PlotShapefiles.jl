@@ -8,11 +8,18 @@
 AbstractGeom = Shapefile.GeoInterface.AbstractGeometry
 
 # Plot Shapefile - given array of shapes and a canvas
-function plotshape(shparray::AbstractArray{T, 1},
+function plotshape(shparray::AbstractArray{Union{Missing, T}, 1},
                    canvas::Compose.Context;
                    convertcoords=lonlat_to_webmercator, img_width=12cm,
                    line_width=0.05mm, line_color="black", fill_color=nothing,
                    radius=[0.5cm]) where {T<:AbstractGeom}
+
+    # Check for missings
+    try
+        shparray = disallowmissing(shparray)
+    catch
+        error("Error: Shape array contains missing values")
+    end
 
     # Plot and return canvas
     draw_shp(shparray, canvas, convertcoords, line_width, line_color, fill_color, radius)
