@@ -14,6 +14,7 @@ using Reexport
 @reexport using Images
 using Cairo: CairoARGBSurface
 using FixedPointNumbers: Normed
+using Missings
 
 import Base.identity
 
