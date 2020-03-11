@@ -16,7 +16,7 @@ Missings = "e1d29d7a-bbdc-5cf2-9ac0-f12de2c33e28"
 
 [compat]
 julia = "1"
-Cairo = "0.8.0"
+Cairo = "1.0.2"
 Colors = "0.11.2"
 Compose = "0.8.1"
 FixedPointNumbers = "0.7.1"
