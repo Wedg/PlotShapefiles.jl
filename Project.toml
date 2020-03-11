@@ -1,7 +1,7 @@
 name = "PlotShapefiles"
 uuid = "297584a0-97f5-11e9-2762-9b6638c511aa"
 authors = ["Michael Wedgwood <mwedg@yahoo.co.uk>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 Cairo = "159f3aea-2a34-519c-b102-8c37f9878175"
