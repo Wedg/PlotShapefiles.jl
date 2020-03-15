@@ -25,3 +25,9 @@ Measures = "0.3.1"
 Missings = "0.4.3"
 Reexport = "0.2.0"
 Shapefile = "0.6.2"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
