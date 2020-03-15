@@ -1,6 +1,6 @@
 #Start Test Script
 using PlotShapefiles
-using Base.Test
+using Test
 
 # Run tests
 
